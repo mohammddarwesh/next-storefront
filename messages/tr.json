@@ -1,0 +1,30 @@
+{
+  "Navigation": {
+    "home": "Ana Sayfa",
+    "products": "Ürünler",
+    "cart": "Sepet",
+    "signIn": "Giriş Yap",
+    "signUp": "Kayıt Ol",
+    "browseProducts": "Ürünleri Keşfet",
+    "learnMore": "Daha Fazla Bilgi"
+  },
+  "Common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",
+    "backToHome": "Ana Sayfaya Dön",
+    "welcome": "{name}'a Hoş Geldiniz",
+    "description": "Harika fiyatlarla inanılmaz ürünler keşfedin. Hemen alışveriş yapın ve hızlı teslimatın keyfini çıkarın."
+  },
+  "ProductCard": {
+    "addToCart": "Sepete Ekle",
+    "addedToCart": "Sepete eklendi!"
+  },
+  "Filters": {
+    "filters": "Filtreler",
+    "reset": "Sıfırla",
+    "categories": "Kategoriler",
+    "priceRange": "Fiyat Aralığı",
+    "rating": "Değerlendirme",
+    "stars": "yıldız"
+  }
+}

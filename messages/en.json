@@ -1,0 +1,30 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "browseProducts": "Browse Products",
+    "learnMore": "Learn More"
+  },
+  "Common": {
+    "loading": "Loading...",
+    "error": "Something went wrong. Please try again.",
+    "backToHome": "Back to Home",
+    "welcome": "Welcome to {name}",
+    "description": "Discover amazing products at great prices. Shop now and enjoy fast delivery to your doorstep."
+  },
+  "ProductCard": {
+    "addToCart": "Add to Cart",
+    "addedToCart": "Added to cart!"
+  },
+  "Filters": {
+    "filters": "Filters",
+    "reset": "Reset",
+    "categories": "Categories",
+    "priceRange": "Price Range",
+    "rating": "Rating",
+    "stars": "stars"
+  }
+}
