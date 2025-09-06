@@ -4,24 +4,33 @@
     "products": "Ürünler",
     "cart": "Sepet",
     "signIn": "Giriş Yap",
-    "signUp": "Kayıt Ol",
+    "signUp": "Kayıt Ol"
+  },
+  "Home": {
+    "title": "Next Storefront - Premium Alışveriş Deneyimi",
+    "description": "Harika fiyatlarla inanılmaz ürünler keşfedin. Hemen alışveriş yapın ve hızlı teslimatın keyfini çıkarın.",
     "browseProducts": "Ürünleri Keşfet",
     "learnMore": "Daha Fazla Bilgi",
     "featuredProducts": "Öne Çıkan Ürünler",
-    "featuredProductsDescription": "Özenle seçilmiş premium ürünlerimizi keşfedin",
+    "featuredProductsDescription": "Özenle seçilmiş premium ürünlerimizi keşfedin"
+  },
+  "Features": {
+    "title": "Neden Bizi Tercih Etmelisiniz",
+    "description": "Premium hizmetlerimizle en iyi alışveriş deneyimini yaşayın",
     "premiumQuality": "Premium Kalite",
     "premiumQualityDescription": "Sadece güvenilir markalardan en iyi ürünler",
     "fastDelivery": "Hızlı Teslimat",
     "fastDeliveryDescription": "Hızlı ve güvenilir kargo",
     "securePayment": "Güvenli Ödeme",
-    "securePaymentDescription": "%100 güvenli ödeme işlemi"
+    "securePaymentDescription": "%100 güvenli ödeme işlemi",
+    "easyReturns": "Kolay İade",
+    "easyReturnsDescription": "30 gün içinde ücretsiz iade imkanı"
   },
   "Common": {
     "loading": "Yükleniyor...",
     "error": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",
     "backToHome": "Ana Sayfaya Dön",
     "welcome": "{name}'a Hoş Geldiniz",
-    "description": "Harika fiyatlarla inanılmaz ürünler keşfedin. Hemen alışveriş yapın ve hızlı teslimatın keyfini çıkarın.",
     "noProducts": "Ürün bulunamadı",
     "noProductsDescription": "Aradığınız kriterlere uygun ürün bulunamadı.",
     "viewAllProducts": "Tüm Ürünleri Görüntüle"
@@ -38,9 +47,5 @@
     "priceRange": "Fiyat Aralığı",
     "rating": "Değerlendirme",
     "stars": "yıldız"
-  },
-  "Home": {
-    "title": "Next Storefront - Premium Alışveriş Deneyimi",
-    "description": "Harika fiyatlarla inanılmaz ürünler keşfedin. Hemen alışveriş yapın ve hızlı teslimatın keyfini çıkarın."
   }
 }

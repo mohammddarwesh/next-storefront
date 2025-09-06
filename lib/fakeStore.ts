@@ -2,7 +2,6 @@ import { Product } from "@/types/product";
 
 const BASE_URL = "https://fakestoreapi.com";
 
-
 export async function getProducts(limit?: number ): Promise<Product[]> {
     const url = new URL(`${BASE_URL}/products`);
     if(limit){
@@ -10,7 +9,7 @@ export async function getProducts(limit?: number ): Promise<Product[]> {
     }
     const response = await fetch(url,{
         next:{
-            revalidate:60*60*24 // 1 day
+            revalidate:3600 // 1 hour
         }
     });
     if(!response.ok){

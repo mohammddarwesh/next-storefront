@@ -4,24 +4,33 @@
     "products": "Products",
     "cart": "Cart",
     "signIn": "Sign In",
-    "signUp": "Sign Up",
+    "signUp": "Sign Up"
+  },
+  "Home": {
+    "title": "Next Storefront - Premium Shopping Experience",
+    "description": "Discover amazing products at great prices. Shop now and enjoy fast delivery to your doorstep.",
     "browseProducts": "Browse Products",
     "learnMore": "Learn More",
     "featuredProducts": "Featured Products",
-    "featuredProductsDescription": "Discover our handpicked selection of premium products",
+    "featuredProductsDescription": "Discover our handpicked selection of premium products"
+  },
+  "Features": {
+    "title": "Why Choose Us",
+    "description": "Experience the best in online shopping with our premium services",
     "premiumQuality": "Premium Quality",
     "premiumQualityDescription": "Only the finest products from trusted brands",
     "fastDelivery": "Fast Delivery",
     "fastDeliveryDescription": "Quick and reliable shipping to your door",
     "securePayment": "Secure Payment",
-    "securePaymentDescription": "100% secure payment processing"
+    "securePaymentDescription": "100% secure payment processing",
+    "easyReturns": "Easy Returns",
+    "easyReturnsDescription": "Hassle-free returns within 30 days"
   },
   "Common": {
     "loading": "Loading...",
     "error": "Something went wrong. Please try again.",
     "backToHome": "Back to Home",
     "welcome": "Welcome to {name}",
-    "description": "Discover amazing products at great prices. Shop now and enjoy fast delivery to your doorstep.",
     "noProducts": "No products found",
     "noProductsDescription": "We couldn't find any products matching your criteria.",
     "viewAllProducts": "View all products"
@@ -38,9 +47,5 @@
     "priceRange": "Price Range",
     "rating": "Rating",
     "stars": "stars"
-  },
-  "Home": {
-    "title": "Next Storefront - Premium Shopping Experience",
-    "description": "Discover amazing products at great prices. Shop now and enjoy fast delivery to your doorstep."
   }
 }
