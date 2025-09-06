@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '../../i18n/routing';
 import { getMessages } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
+import MainNav from '@/components/MainNav';
 
 // Derive a strict locale type from your routing
 type Locale = (typeof routing.locales)[number];
@@ -34,6 +35,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <MainNav />
       {children}
     </NextIntlClientProvider>
   );

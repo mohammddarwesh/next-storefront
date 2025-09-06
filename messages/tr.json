@@ -6,18 +6,30 @@
     "signIn": "Giriş Yap",
     "signUp": "Kayıt Ol",
     "browseProducts": "Ürünleri Keşfet",
-    "learnMore": "Daha Fazla Bilgi"
+    "learnMore": "Daha Fazla Bilgi",
+    "featuredProducts": "Öne Çıkan Ürünler",
+    "featuredProductsDescription": "Özenle seçilmiş premium ürünlerimizi keşfedin",
+    "premiumQuality": "Premium Kalite",
+    "premiumQualityDescription": "Sadece güvenilir markalardan en iyi ürünler",
+    "fastDelivery": "Hızlı Teslimat",
+    "fastDeliveryDescription": "Hızlı ve güvenilir kargo",
+    "securePayment": "Güvenli Ödeme",
+    "securePaymentDescription": "%100 güvenli ödeme işlemi"
   },
   "Common": {
     "loading": "Yükleniyor...",
     "error": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",
     "backToHome": "Ana Sayfaya Dön",
     "welcome": "{name}'a Hoş Geldiniz",
-    "description": "Harika fiyatlarla inanılmaz ürünler keşfedin. Hemen alışveriş yapın ve hızlı teslimatın keyfini çıkarın."
+    "description": "Harika fiyatlarla inanılmaz ürünler keşfedin. Hemen alışveriş yapın ve hızlı teslimatın keyfini çıkarın.",
+    "noProducts": "Ürün bulunamadı",
+    "noProductsDescription": "Aradığınız kriterlere uygun ürün bulunamadı.",
+    "viewAllProducts": "Tüm Ürünleri Görüntüle"
   },
   "ProductCard": {
     "addToCart": "Sepete Ekle",
-    "addedToCart": "Sepete eklendi!"
+    "addedToCart": "Sepete eklendi!",
+    "quickView": "Hızlı Görünüm"
   },
   "Filters": {
     "filters": "Filtreler",
@@ -26,5 +38,9 @@
     "priceRange": "Fiyat Aralığı",
     "rating": "Değerlendirme",
     "stars": "yıldız"
+  },
+  "Home": {
+    "title": "Next Storefront - Premium Alışveriş Deneyimi",
+    "description": "Harika fiyatlarla inanılmaz ürünler keşfedin. Hemen alışveriş yapın ve hızlı teslimatın keyfini çıkarın."
   }
 }

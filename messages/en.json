@@ -6,18 +6,30 @@
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "browseProducts": "Browse Products",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "featuredProducts": "Featured Products",
+    "featuredProductsDescription": "Discover our handpicked selection of premium products",
+    "premiumQuality": "Premium Quality",
+    "premiumQualityDescription": "Only the finest products from trusted brands",
+    "fastDelivery": "Fast Delivery",
+    "fastDeliveryDescription": "Quick and reliable shipping to your door",
+    "securePayment": "Secure Payment",
+    "securePaymentDescription": "100% secure payment processing"
   },
   "Common": {
     "loading": "Loading...",
     "error": "Something went wrong. Please try again.",
     "backToHome": "Back to Home",
     "welcome": "Welcome to {name}",
-    "description": "Discover amazing products at great prices. Shop now and enjoy fast delivery to your doorstep."
+    "description": "Discover amazing products at great prices. Shop now and enjoy fast delivery to your doorstep.",
+    "noProducts": "No products found",
+    "noProductsDescription": "We couldn't find any products matching your criteria.",
+    "viewAllProducts": "View all products"
   },
   "ProductCard": {
     "addToCart": "Add to Cart",
-    "addedToCart": "Added to cart!"
+    "addedToCart": "Added to cart!",
+    "quickView": "Quick View"
   },
   "Filters": {
     "filters": "Filters",
@@ -26,5 +38,9 @@
     "priceRange": "Price Range",
     "rating": "Rating",
     "stars": "stars"
+  },
+  "Home": {
+    "title": "Next Storefront - Premium Shopping Experience",
+    "description": "Discover amazing products at great prices. Shop now and enjoy fast delivery to your doorstep."
   }
 }
