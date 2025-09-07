@@ -77,7 +77,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Quick View */}
         <Button asChild variant="outline" className="w-full mt-2">
-          <Link href={`/products/${product.id}`} className="group/button">
+          <Link href={`/product/${product.id}`} className="group/button">
             <span className="group-hover/button:translate-x-1 transition-transform">
               Quick View
             </span>

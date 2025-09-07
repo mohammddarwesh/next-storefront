@@ -1,16 +1,14 @@
-import { headers } from 'next/headers';
-
-export async function buildCanonicalUrl(path: string, locale: string): Promise<string> {
-  const headersList = await headers();
+export async function getBaseUrl(): Promise<string> {
+  if (typeof window !== 'undefined') return '';
+  
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const host = headersList.get('host') || 'localhost:3000';
-  return `${protocol}://${host}/${locale}${path}`;
+  const host = process.env.VERCEL_URL || 'localhost:3000';
+  return `${protocol}://${host}`;
 }
 
-export function getBaseUrl(): string {
-  if (typeof window !== 'undefined') {
-    return '';
-  }
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  return `${protocol}://${process.env.VERCEL_URL || 'localhost:3000'}`;
+export async function buildCanonicalUrl(path: string, locale: string): Promise<string> {
+  const baseUrl = await getBaseUrl();
+  // Ensure path starts with a slash
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return `${baseUrl}/${locale}${normalizedPath}`;
 }

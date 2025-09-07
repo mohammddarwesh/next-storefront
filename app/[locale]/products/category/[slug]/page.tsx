@@ -17,7 +17,7 @@ interface CategoryPageProps {
     search?: string;
   };
 }
-
+// Generate static params for all categories in both languages
 export async function generateStaticParams() {
   const categories = await getCategories();
   return categories.flatMap(category => [

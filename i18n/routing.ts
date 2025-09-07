@@ -17,6 +17,10 @@ export const routing = {
       en: '/products',
       tr: '/urunler',
     },
+    '/product/[id]': {
+      en: '/product/[id]',
+      tr: '/urun/[id]',
+    },
     '/cart': {
       en: '/cart',
       tr: '/sepet',

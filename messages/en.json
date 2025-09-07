@@ -36,7 +36,6 @@
     "viewAllProducts": "View all products"
   },
   "ProductCard": {
-    "addToCart": "Add to Cart",
     "addedToCart": "Added to cart!",
     "quickView": "Quick View"
   },
@@ -46,8 +45,38 @@
     "description": "Browse our collection of {category} products",
     "notFound": "Category not found",
     "showingResults": "Showing {count, plural, one {# product} other {# products}}",
-    "sortBy": "Sort by",
     "searchPlaceholder": "Search {category} products..."
+  },
+  "Product": {
+    "title": "{title} | Next Storefront",
+    "description": "{description}",
+    "price": "${price}",
+    "addToCart": "Add to Cart",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "descriptionTab": "Description",
+    "reviewsTab": "Reviews ({count})",
+    "specificationsTab": "Specifications",
+    "shippingTab": "Shipping & Returns",
+    "relatedProducts": "You May Also Like",
+    "reviews": {
+      "title": "Customer Reviews",
+      "noReviews": "No reviews yet. Be the first to review this product!",
+      "writeReview": "Write a Review"
+    },
+    "specifications": {
+      "title": "Product Specifications",
+      "category": "Category",
+      "weight": "Weight",
+      "dimensions": "Dimensions"
+    },
+    "shipping": {
+      "title": "Shipping & Returns",
+      "shippingInfo": "Free shipping on all orders over $50. Standard delivery takes 3-5 business days.",
+      "returnsInfo": "Easy 30-day return policy. If you're not satisfied, return it for a full refund.",
+      "shippingMethods": "Shipping Methods",
+      "returnPolicy": "Return Policy"
+    }
   },
   "Products": {
     "title": "Our Products",

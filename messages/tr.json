@@ -36,7 +36,6 @@
     "viewAllProducts": "Tüm Ürünleri Görüntüle"
   },
   "ProductCard": {
-    "addToCart": "Sepete Ekle",
     "addedToCart": "Sepete eklendi!",
     "quickView": "Hızlı Görünüm"
   },
@@ -46,8 +45,38 @@
     "description": "{category} kategorisindeki ürünlerimizi keşfedin",
     "notFound": "Kategori bulunamadı",
     "showingResults": "{count, plural, one {# ürün} other {# ürün}}",
-    "sortBy": "Sırala",
     "searchPlaceholder": "{category} ürünlerinde ara..."
+  },
+  "Product": {
+    "title": "{title} | Next Storefront",
+    "description": "{description}",
+    "price": "{price} TL",
+    "addToCart": "Sepete Ekle",
+    "inStock": "Stokta Var",
+    "outOfStock": "Stokta Yok",
+    "descriptionTab": "Açıklama",
+    "reviewsTab": "Yorumlar ({count})",
+    "specificationsTab": "Özellikler",
+    "shippingTab": "Kargo & İade",
+    "relatedProducts": "Benzer Ürünler",
+    "reviews": {
+      "title": "Müşteri Yorumları",
+      "noReviews": "Henüz yorum yok. Bu ürün için ilk yorumu siz yapın!",
+      "writeReview": "Yorum Yap"
+    },
+    "specifications": {
+      "title": "Ürün Özellikleri",
+      "category": "Kategori",
+      "weight": "Ağırlık",
+      "dimensions": "Boyutlar"
+    },
+    "shipping": {
+      "title": "Kargo ve İade",
+      "shippingInfo": "50 TL ve üzeri alışverişlerde ücretsiz kargo. Standart teslimat süresi 3-5 iş günüdür.",
+      "returnsInfo": "Kolay 30 günlük iade politikası. Memnun kalmazsanız, ürünü iade ederek ücretinizi geri alabilirsiniz.",
+      "shippingMethods": "Kargo Seçenekleri",
+      "returnPolicy": "İade Politikası"
+    }
   },
   "Products": {
     "title": "Ürünlerimiz",
