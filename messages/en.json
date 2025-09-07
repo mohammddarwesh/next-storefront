@@ -40,6 +40,38 @@
     "addedToCart": "Added to cart!",
     "quickView": "Quick View"
   },
+  "Category": {
+    "title": "{category} Products",
+    "pageTitle": "{category} Products | Next Storefront",
+    "description": "Browse our collection of {category} products",
+    "notFound": "Category not found",
+    "showingResults": "Showing {count, plural, one {# product} other {# products}}",
+    "sortBy": "Sort by",
+    "searchPlaceholder": "Search {category} products..."
+  },
+  "Products": {
+    "title": "Our Products",
+    "description": "Browse our wide selection of high-quality products",
+    "allProducts": "All Products",
+    "browseAllProducts": "Browse our complete product catalog",
+    "filters": "Filters",
+    "sortOptions": {
+      "latest": "Latest",
+      "priceLowToHigh": "Price: Low to High",
+      "priceHighToLow": "Price: High to Low",
+      "nameAZ": "Name: A to Z",
+      "nameZA": "Name: Z to A"
+    },
+    "categories": "Categories",
+    "allCategories": "All Categories",
+    "electronics": "Electronics",
+    "jewelry": "Jewelry",
+    "mensClothing": "Men's Clothing",
+    "womensClothing": "Women's Clothing",
+    "sortBy": "Sort By",
+    "featured": "Featured",
+    "resetFilters": "Reset Filters"
+  },
   "Filters": {
     "filters": "Filters",
     "reset": "Reset",

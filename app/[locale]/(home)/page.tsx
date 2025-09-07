@@ -21,8 +21,7 @@ export default async function HomePage({
 }: {
   params: { locale: string };
 }) {
-  const [t, tCommon, tHome] = await Promise.all([
-    getTranslations('Navigation'),
+  const [tCommon, tHome] = await Promise.all([
     getTranslations('Common'),
     getTranslations('Home')
   ]);

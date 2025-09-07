@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import ProductsGrid from '../products/ProductsGrid';
-import { getProducts } from '@/lib/fakeStore';
+import { getProducts } from '@/lib/api/getProducts';
 
 export default async function ProductsSection() {
   const t = await getTranslations('Home');

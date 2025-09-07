@@ -1,9 +1,11 @@
-import { Product } from "@/types/product";
+import { Product } from "@/lib/types/product";
 
-const BASE_URL = "https://fakestoreapi.com";
 
-export async function getProducts(limit?: number ): Promise<Product[]> {
-    const url = new URL(`${BASE_URL}/products`);
+
+export async function getProducts(limit?: number): Promise<Product[]> {
+    const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://fakestoreapi.com';
+    const url = new URL('/products', BASE_URL);
+    console.log("Final URL:", url.toString());
     if(limit){
         url.searchParams.set('limit', limit.toString());
     }

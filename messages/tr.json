@@ -40,6 +40,38 @@
     "addedToCart": "Sepete eklendi!",
     "quickView": "Hızlı Görünüm"
   },
+  "Category": {
+    "title": "{category} Ürünleri",
+    "pageTitle": "{category} Ürünleri | Next Storefront",
+    "description": "{category} kategorisindeki ürünlerimizi keşfedin",
+    "notFound": "Kategori bulunamadı",
+    "showingResults": "{count, plural, one {# ürün} other {# ürün}}",
+    "sortBy": "Sırala",
+    "searchPlaceholder": "{category} ürünlerinde ara..."
+  },
+  "Products": {
+    "title": "Ürünlerimiz",
+    "description": "Geniş ürün yelpazemizden keşfedin",
+    "allProducts": "Tüm Ürünler",
+    "browseAllProducts": "Tüm ürün kataloğumuzu keşfedin",
+    "filters": "Filtreler",
+    "sortOptions": {
+      "latest": "En Yeni",
+      "priceLowToHigh": "Fiyat: Düşükten Yükseğe",
+      "priceHighToLow": "Fiyat: Yüksekten Düşüğe",
+      "nameAZ": "İsim: A'dan Z'ye",
+      "nameZA": "İsim: Z'den A'ya"
+    },
+    "categories": "Kategoriler",
+    "allCategories": "Tüm Kategoriler",
+    "electronics": "Elektronik",
+    "jewelry": "Takı",
+    "mensClothing": "Erkek Giyim",
+    "womensClothing": "Kadın Giyim",
+    "sortBy": "Sırala",
+    "featured": "Öne Çıkanlar",
+    "resetFilters": "Filtreleri Sıfırla"
+  },
   "Filters": {
     "filters": "Filtreler",
     "reset": "Sıfırla",
