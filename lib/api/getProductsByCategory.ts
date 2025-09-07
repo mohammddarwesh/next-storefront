@@ -18,7 +18,12 @@ export async function getProductsByCategory({
 
     console.log("category from getProductsByCategory", category);
   const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://fakestoreapi.com';
-  const url = new URL(`/products/category/${encodeURIComponent(category)}`, BASE_URL);
+  
+  // Decode the category first to handle any URL encoding, then re-encode it properly
+  const decodedCategory = decodeURIComponent(category);
+  const encodedCategory = encodeURIComponent(decodedCategory);
+  
+  const url = new URL(`/products/category/${encodedCategory}`, BASE_URL);
   
   // Add query parameters
   const params = new URLSearchParams();

@@ -17,12 +17,20 @@ export async function getCategories(): Promise<Category[]> {
     const categories = await response.json();
     console.log("categories from getCategories", categories);
     // Transform the string array into Category objects
-    return categories.map((name: string, index: number) => ({
-        id: `category-${index + 1}`,
-        name: name.split(' ').map(word => 
-            word.charAt(0).toUpperCase() + word.slice(1)
-        ).join(' '),
-        slug: name.toLowerCase().replace(/\s+/g, '-'),
-        description: ''
-    }));
+    return categories.map((name: string, index: number) => {
+        // Format the display name with proper capitalization
+        const displayName = name.split(' ').map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        ).join(' ');
+        
+        // Create a slug that matches the API's expected format
+        const slug = name.toLowerCase();
+        
+        return {
+            id: `category-${index + 1}`,
+            name: displayName,
+            slug: slug,
+            description: ''
+        };
+    });
 }

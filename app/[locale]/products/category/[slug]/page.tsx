@@ -90,8 +90,13 @@ export default async function CategoryPage({
     getCategories()
   ]);
   
-  const category = categories.find(c => c.slug === slug);
+  // Decode the slug for comparison
+  const decodedSlug = decodeURIComponent(slug);
+  
+  // Get the current category using the decoded slug
+  const category = categories.find(c => c.slug === decodedSlug);
   if (!category) {
+    console.error('Category not found for slug:', { slug, decodedSlug, categories });
     notFound();
   }
 
@@ -99,9 +104,10 @@ export default async function CategoryPage({
   const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
   const sort = searchParams?.sort || 'latest';
   const search = searchParams?.search || '';
-console.log("category from params", category);
+  console.log("Fetching products for category:", { slug, decodedSlug });
+  
   const { products, total } = await getProductsByCategory({
-    category: slug,
+    category: decodedSlug,
     page,
     sort,
     search,

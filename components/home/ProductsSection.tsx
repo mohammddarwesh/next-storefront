@@ -14,8 +14,8 @@ export default async function ProductsSection() {
             products={featuredProducts}
             title={t('featuredProducts')}
             description={t('featuredProductsDescription')}
-            showViewAll
-            viewAllHref="/products"
+            // showViewAll={true}
+            // viewAllHref="/products"
           />
         </div>
       </section>
