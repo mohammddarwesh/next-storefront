@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
 import { locales, defaultLocale } from '../i18n/request';
 import './globals.css';
+import { Providers } from '@/providers/providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,15 +25,17 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster position="bottom-right" />
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster position="top-center" />
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

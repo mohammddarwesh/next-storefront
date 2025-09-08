@@ -6,6 +6,8 @@ import { routing } from '../../i18n/routing';
 import { getMessages } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
 import MainNav from '@/components/MainNav';
+import { ThemeProvider } from "@/components/theme-provider";
+import { CartSheet } from '@/components/cart/CartSheet';
 
 // Derive a strict locale type from your routing
 type Locale = (typeof routing.locales)[number];
@@ -35,8 +37,10 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <MainNav />
-      {children}
+        <MainNav />
+        <main className="min-h-[calc(100vh-4rem)]">
+          {children}
+        </main>  
     </NextIntlClientProvider>
   );
 }

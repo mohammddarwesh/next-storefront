@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Product } from '@/lib/types/product';
 import { Button } from '../ui/button';
 import { ShoppingCart, Star } from 'lucide-react';
+import AddToCartButton from '../cart/AddToCartButton';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -45,8 +46,8 @@ export default function ProductCard({ product }: { product: Product }) {
           <div className="flex items-center gap-1">
             <div className="flex text-yellow-400">
               {[...Array(5)].map((_, i) => (
-                <Star 
-                  key={i} 
+                <Star
+                  key={i}
                   className={`h-4 w-4 ${i < Math.round(product.rating?.rate || 0) ? 'fill-current' : 'text-muted-foreground/30'}`}
                 />
               ))}
@@ -69,10 +70,7 @@ export default function ProductCard({ product }: { product: Product }) {
               </span>
             )}
           </div>
-          <Button size="sm" variant="outline" className="rounded-full h-9 w-9 p-0">
-            <ShoppingCart className="h-4 w-4" />
-            <span className="sr-only">Add to cart</span>
-          </Button>
+          <AddToCartButton product={product} />
         </div>
 
         {/* Quick View */}

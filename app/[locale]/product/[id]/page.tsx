@@ -4,9 +4,10 @@ import { getProductById } from '@/lib/api/getProductById';
 import { getBaseUrl, buildCanonicalUrl } from '@/lib/utils/url';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Star, ShoppingCart, Heart } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Script from 'next/script';
 import { Metadata } from 'next';
+import { ProductActions } from '@/components/product/ProductActions';
 
 export async function generateMetadata({
   params: { id, locale },
@@ -120,7 +121,7 @@ export default async function ProductPage({
         }}
       />
       <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {/* Product Images */}
         <div className="space-y-4">
           <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
@@ -175,9 +176,9 @@ export default async function ProductPage({
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-8">
             <p className="text-3xl font-bold">${product.price.toFixed(2)}</p>
-            <p className="text-gray-700">{product.description}</p>
+            <p className="text-gray-700 dark:text-gray-300">{product.description}</p>
 
             <div className="flex items-center space-x-4 pt-4">
               <div className="flex items-center space-x-2">
@@ -192,16 +193,7 @@ export default async function ProductPage({
             </div>
           </div>
 
-          <div className="flex space-x-4 pt-4">
-            <Button size="lg" className="flex-1">
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              {t('addToCart')}
-            </Button>
-            <Button variant="outline" size="icon" className="h-12 w-12">
-              <Heart className="h-5 w-5" />
-              <span className="sr-only">Add to wishlist</span>
-            </Button>
-          </div>
+          <ProductActions product={product} />
         </div>
       </div>
 
@@ -218,7 +210,7 @@ export default async function ProductPage({
           </nav>
         </div>
         <div className="py-6">
-          <p className="text-gray-700">{product.description}</p>
+          <p className="text-gray-700 dark:text-gray-300">{product.description}</p>
         </div>
       </div>
       </div>

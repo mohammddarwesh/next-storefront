@@ -4,9 +4,11 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ShoppingBag } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
+import { CartButton } from './cart/CartButton';
+import { CartSheet } from './cart/CartSheet';
 
 export default function MainNav() {
   const t = useTranslations('Navigation');
@@ -31,7 +33,7 @@ export default function MainNav() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -50,17 +52,24 @@ export default function MainNav() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link 
-              href="/products" 
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                isActive('/products') ? 'text-primary' : 'text-foreground/80'
-              }`}
+            <Link
+              href="/products"
+              className={`text-sm font-medium transition-colors hover:text-primary ${isActive('/products') ? 'text-primary' : 'text-foreground/80'
+                }`}
             >
               {t('products')}
             </Link>
-            <div className="flex items-center space-x-2">
-              <LanguageSwitcher />
+            <Link
+              href="/cart"
+              className={`text-sm font-medium transition-colors hover:text-primary ${isActive('/cart') ? 'text-primary' : 'text-foreground/80'
+                }`}
+            >
+              {t('cart')}
+            </Link>
+            <div className="flex items-center space-x-4">
               <ThemeToggle />
+              <LanguageSwitcher />
+              <CartSheet />
             </div>
           </nav>
 
@@ -82,12 +91,19 @@ export default function MainNav() {
           <div className="container mx-auto px-4 py-4 space-y-4">
             <Link
               href="/products"
-              className={`block py-2 text-base font-medium ${
-                isActive('/products') ? 'text-primary' : 'hover:text-primary text-foreground/80'
-              }`}
+              className={`block py-2 text-base font-medium ${isActive('/products') ? 'text-primary' : 'hover:text-primary text-foreground/80'
+                }`}
               onClick={() => setIsOpen(false)}
             >
               {t('products')}
+            </Link>
+            <Link
+              href="/cart"
+              className={`block py-2 text-base font-medium ${isActive('/cart') ? 'text-primary' : 'hover:text-primary text-foreground/80'
+                }`}
+              onClick={() => setIsOpen(false)}
+            >
+              {t('cart')}
             </Link>
             <div className="flex items-center space-x-4 pt-2">
               <LanguageSwitcher />
