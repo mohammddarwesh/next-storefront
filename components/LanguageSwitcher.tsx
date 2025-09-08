@@ -13,9 +13,16 @@ export default function LanguageSwitcher() {
 
   const changeLanguage = (lang: Locale) => {
     // Get the current path without the locale prefix
-    const path = pathname.replace(/^\/[a-z]{2}(-[A-Z]{2})?\//, '/');
-    // Navigate to the same path with the new locale
-    router.push(`/${lang}${path}`);
+    let path = pathname;
+    // Remove the current locale prefix if it exists
+    const localePattern = new RegExp(`^/(${locales.join('|')})(/|$)`);
+    path = path.replace(localePattern, '/');
+    // Handle root path case
+    if (path === '/') {
+      router.push(`/${lang}`);
+    } else {
+      router.push(`/${lang}${path}`);
+    }
   };
 
   return (

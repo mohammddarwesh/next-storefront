@@ -6,7 +6,7 @@ export type Locale = (typeof locales)[number];
 export const routing = {
   locales: [...locales],
   defaultLocale,
-  localePrefix: 'as-needed',
+  localePrefix: 'always',
   pathnames: {
     // Main pages
     '/': {
