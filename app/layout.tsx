@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from 'react-hot-toast';
-import Link from 'next/link';
-import { locales, defaultLocale } from '../i18n/request';
 import './globals.css';
 import { Providers } from '@/providers/providers';
 

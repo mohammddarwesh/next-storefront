@@ -1,4 +1,4 @@
-import { Product, SearchParams } from "../types/index";
+import { Product } from "../types/index";
 
 interface GetProductsByCategoryOptions {
   category: string;

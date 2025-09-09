@@ -1,9 +1,7 @@
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
 import { getProductById } from '@/lib/api/getProductById';
 import { getBaseUrl, buildCanonicalUrl } from '@/lib/utils/url';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import Script from 'next/script';
 import { Metadata } from 'next';
@@ -71,10 +69,7 @@ export default async function ProductPage({
 }: {
   params: { id: string; locale: string };
 }) {
-  const [t, product] = await Promise.all([
-    getTranslations('Product'),
-    getProductById(id),
-  ]);
+  const product = await getProductById(id);
 
   const rating = product.rating ? Math.round(product.rating.rate) : 0;
   const stars = Array(5).fill(0).map((_, i) => i < rating);

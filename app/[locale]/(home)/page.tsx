@@ -6,9 +6,10 @@ import FeaturesSection from '@/components/home/FeaturesSection';
 export async function generateMetadata({
   params
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'Home' });
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Home' });
   
   return {
     title: t('title'),
@@ -16,11 +17,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function HomePage({
-  params: { locale },
-}: {
-  params: { locale: string };
-}) {
+export default async function HomePage() {
   const [tCommon, tHome] = await Promise.all([
     getTranslations('Common'),
     getTranslations('Home')

@@ -7,16 +7,13 @@ import {
   removeItem,
   updateItemQuantity,
   clearCart,
-  openCartDrawer,
-  closeCartDrawer,
   selectCartItems,
-  selectIsCartOpen,
   selectCartTotalQuantity,
   selectCartTotalPrice,
   selectCartItemCount,
   selectIsInCart,
 } from '@/lib/features/cart/cartSlice';
-import type { CartItem, AddToCartPayload } from '@/lib/types/cart';
+import type { AddToCartPayload } from '@/lib/types/cart';
 import { useCallback } from 'react';
 
 export const useCart = () => {
@@ -60,7 +57,7 @@ export const useCart = () => {
     addToCart,
     removeFromCart,
     updateCartItemQuantity,
-clearCart: clearCartItems,
+    clearCart: clearCartItems,
     isInCart,
   };
 };

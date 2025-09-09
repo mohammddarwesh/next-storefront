@@ -1,8 +1,6 @@
 
 
-import { Suspense } from 'react';
 import { getCategories } from '@/lib/api/getCategories';
-import CategoryNavigation from '@/components/products/CategoryNavigation';
 import { getTranslations } from 'next-intl/server';
 
 export default async function ProductsLayout({
@@ -25,16 +23,7 @@ export default async function ProductsLayout({
           {t('description')}
         </p>
       </div>
-
-      <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 pb-4">
-        <Suspense fallback={
-          <div className="h-16 w-full animate-pulse rounded-md bg-muted" />
-        }>
-          <CategoryNavigation categories={categories} />
-        </Suspense>
-      </div>
-
-      <main className="space-y-8">
+      <main className="space-y-8" role="main">
         {children}
       </main>
     </div>

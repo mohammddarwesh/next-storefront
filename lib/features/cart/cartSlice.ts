@@ -10,7 +10,6 @@ import {
   updateItemQuantity as updateItemQuantityUtil,
 } from './cartUtils';
 import type {
-  CartItem,
   CartState,
   AddToCartPayload,
   UpdateQuantityPayload,

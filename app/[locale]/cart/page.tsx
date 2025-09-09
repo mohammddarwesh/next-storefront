@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useCart } from '@/hooks/useCart';
-import type { CartItem } from '@/lib/types/cart';
+import Image from 'next/image';
 import { formatPrice } from '@/lib/utils/format';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
@@ -108,34 +108,36 @@ export default function CartPage() {
         )}
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
         {/* Cart Items */}
-        <div className="md:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6">
           {items.length > 0 && (
             <div className="space-y-4">
               <h2 className="text-lg font-semibold">{t('cartItems')} ({totalQuantity})</h2>
               {items.map((item) => (
                 <Card key={item.id} className="overflow-hidden">
-                  <CardContent className="p-4">
-                    <div className="flex gap-4">
-                      <Link href={`/product/${item.id}`} className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Link href={`/product/${item.id}`} className="h-32 w-full sm:h-24 sm:w-24 relative flex-shrink-0 overflow-hidden rounded-md border">
                         {item.image && (
-                          <img
+                          <Image
                             src={item.image}
                             alt={item.title}
-                            className="h-full w-full object-cover object-center hover:opacity-90 transition-opacity"
+                            fill
+                            sizes="(max-width: 640px) 100vw, 96px"
+                            className="object-cover object-center hover:opacity-90 transition-opacity"
                           />
                         )}
                       </Link>
-                      <div className="flex-1">
-                        <div className="flex justify-between">
-                          <Link href={`/product/${item.id}`} className="hover:underline">
-                            <h3 className="font-medium hover:text-primary transition-colors">{item.title}</h3>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+                          <Link href={`/product/${item.id}`} className="hover:underline flex-1">
+                            <h3 className="font-medium hover:text-primary transition-colors line-clamp-2">{item.title}</h3>
                           </Link>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-8 w-8"
+                            className="h-8 w-8 self-start sm:self-center"
                             onClick={(e) => {
                               e.preventDefault();
                               removeFromCart(item.id);
@@ -144,33 +146,38 @@ export default function CartPage() {
                             <X className="h-4 w-4" />
                           </Button>
                         </div>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-muted-foreground mt-1">
                           {formatPrice(item.price)}
                         </p>
-                        <div className="mt-2 flex items-center justify-between">
-                          <div className="flex items-center">
+                        <div className="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                          <div className="flex items-center justify-center sm:justify-start">
                             <Button
                               variant="outline"
                               size="sm"
-                              className="h-8 w-8 p-0 rounded-r-none"
+                              className="h-9 w-9 p-0 rounded-r-none"
                               onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
                             >
                               <Minus className="h-4 w-4" />
                             </Button>
-                            <div className="h-8 w-10 border-t border-b border-input flex items-center justify-center text-sm">
+                            <div className="h-9 w-12 border-t border-b border-input flex items-center justify-center text-sm font-medium">
                               {item.quantity}
                             </div>
                             <Button
                               variant="outline"
                               size="sm"
-                              className="h-8 w-8 p-0 rounded-l-none"
+                              className="h-9 w-9 p-0 rounded-l-none"
                               onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
                             >
                               <Plus className="h-4 w-4" />
                             </Button>
                           </div>
-                          <div className="text-sm text-muted-foreground">
-                            {formatPrice(item.price * item.quantity)}
+                          <div className="text-center sm:text-right">
+                            <div className="text-sm font-medium text-primary">
+                              {formatPrice(item.price * item.quantity)}
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              {item.quantity} × {formatPrice(item.price)}
+                            </div>
                           </div>
                         </div>
                       </div>

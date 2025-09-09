@@ -20,5 +20,7 @@ export interface SearchParams {
   sort?: string;
   search?: string;
   category?: string;
+  minPrice?: string;
+  maxPrice?: string;
   [key: string]: string | string[] | undefined;
 }

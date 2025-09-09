@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ShoppingCart, X, ShoppingBag } from 'lucide-react';
+import { ShoppingBag, Minus, Plus, Trash2, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { CartButton } from './CartButton';
 import { Button } from '@/components/ui/button';
@@ -19,7 +19,7 @@ import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/lib/utils/format';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
-import { CartItemRow } from '@/components/cart/CartItemRow';
+import Image from 'next/image';
 
 interface CartSheetProps {
   className?: string;
@@ -32,19 +32,15 @@ export function CartSheet({ className, trigger }: CartSheetProps) {
   const { 
     items, 
     totalPrice, 
-    totalQuantity, 
-    clearCart 
+    totalQuantity,
+    updateCartItemQuantity,
+    removeFromCart
   } = useCart();
 
   const hasItems = items.length > 0;
   
   const handleCloseCart = () => {
     setIsOpen(false);
-  };
-  
-  const handleClearCart = () => {
-    clearCart();
-    // Keep the cart open after clearing to show the empty state
   };
 
   return (
@@ -53,7 +49,7 @@ export function CartSheet({ className, trigger }: CartSheetProps) {
         {trigger || <CartButton onClick={() => setIsOpen(true)} />}
       </SheetTrigger>
       
-      <SheetContent className="flex flex-col w-full sm:max-w-md">
+      <SheetContent className="flex flex-col w-full sm:max-w-md h-full">
         <SheetHeader className="px-1">
           <div className="flex items-center justify-between">
             <div>
@@ -72,83 +68,156 @@ export function CartSheet({ className, trigger }: CartSheetProps) {
         <Separator className="my-4" />
 
         {!hasItems ? (
-          <div className="flex h-full flex-col items-center justify-center space-y-4 p-8 text-center">
-            <ShoppingBag className="h-16 w-16 text-muted-foreground/50" />
-            <div className="space-y-2">
-              <h3 className="text-lg font-medium">{t('empty_cart')}</h3>
-              <p className="text-sm text-muted-foreground">
+          <div className="flex h-full flex-col items-center justify-center space-y-6 p-8 text-center">
+            <div className="rounded-full bg-muted p-6">
+              <ShoppingBag className="h-12 w-12 text-muted-foreground" />
+            </div>
+            <div className="space-y-3">
+              <h3 className="text-xl font-semibold">{t('empty_cart')}</h3>
+              <p className="text-muted-foreground max-w-sm">
                 {t('add_items_to_get_started')}
               </p>
             </div>
-            <Button onClick={handleCloseCart} variant="outline">
-              {t('continue_shopping')}
-            </Button>
+            <div className="space-y-3 w-full max-w-xs">
+              <Button onClick={handleCloseCart} className="w-full" size="lg">
+                <ArrowRight className="h-4 w-4 mr-2" />
+                {t('continue_shopping')}
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/products" onClick={handleCloseCart}>
+                  Browse Products
+                </Link>
+              </Button>
+            </div>
           </div>
         ) : (
           <>
-            <ScrollArea className="flex-1 -mx-6 px-6">
-              <div className="space-y-4">
-                {items.slice(0, 3).map((item) => (
-                  <Link 
+            <ScrollArea className="flex-1 -mx-6 px-6 min-h-0">
+              <div className="space-y-3 py-2">
+                {items.map((item) => (
+                  <div 
                     key={item.id} 
-                    href={`/product/${item.id}`} 
-                    className="flex items-center gap-3 hover:bg-accent/50 rounded-md p-2 -mx-2 transition-colors"
-                    onClick={handleCloseCart}
+                    className="flex items-start gap-3 p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
                   >
-                    <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="h-full w-full object-cover object-center"
-                      />
+                    <Link 
+                      href={`/product/${item.id}`}
+                      onClick={handleCloseCart}
+                      className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border hover:opacity-80 transition-opacity"
+                    >
+                      {typeof item.image === 'string' ? (
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          sizes="64px"
+                          className="object-cover object-center"
+                        />
+                      ) : (
+                        <div className="h-full w-full bg-muted" aria-hidden />
+                      )}
+                    </Link>
+                    
+                    <div className="flex-1 min-w-0 space-y-2">
+                      <Link 
+                        href={`/product/${item.id}`}
+                        onClick={handleCloseCart}
+                        className="block"
+                      >
+                        <h4 className="text-sm font-medium line-clamp-2 hover:text-primary transition-colors">
+                          {item.title}
+                        </h4>
+                      </Link>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-primary">
+                          {formatPrice(item.price)}
+                        </span>
+                        
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1 border rounded-md">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0"
+                              onClick={() => {
+                                if (item.quantity === 1) {
+                                  removeFromCart(item.id);
+                                } else {
+                                  updateCartItemQuantity(item.id, item.quantity - 1);
+                                }
+                              }}
+                            >
+                              <Minus className="h-3 w-3" />
+                            </Button>
+                            
+                            <span className="text-sm font-medium min-w-[2ch] text-center">
+                              {item.quantity}
+                            </span>
+                            
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 w-8 p-0"
+                              onClick={() => updateCartItemQuantity(item.id, item.quantity + 1)}
+                            >
+                              <Plus className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0 text-destructive hover:text-destructive"
+                            onClick={() => removeFromCart(item.id)}
+                          >
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="text-xs text-muted-foreground">
+                        Subtotal: {formatPrice(item.price * item.quantity)}
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-medium truncate group-hover:text-primary transition-colors">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        {formatPrice(item.price)} × {item.quantity}
-                      </p>
-                    </div>
-                  </Link>
+                  </div>
                 ))}
-                {items.length > 3 && (
-                  <p className="text-sm text-muted-foreground text-center">
-                    +{items.length - 3} more items
-                  </p>
-                )}
               </div>
             </ScrollArea>
 
-            <SheetFooter className="flex flex-col gap-3 pt-4">
-              <div className="flex w-full justify-between text-lg font-medium">
-                <span>{t('subtotal')}</span>
-                <span>{formatPrice(totalPrice)}</span>
+            <div className="border-t pt-4 space-y-4">
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">{t('subtotal')}</span>
+                  <span>{formatPrice(totalPrice)}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">Shipping</span>
+                  <span className="text-muted-foreground">Calculated at checkout</span>
+                </div>
+                <Separator />
+                <div className="flex justify-between text-lg font-semibold">
+                  <span>Total</span>
+                  <span>{formatPrice(totalPrice)}</span>
+                </div>
               </div>
               
-              <div className="grid w-full gap-2">
-                {/* <Button asChild size="lg" className="w-full">
-                  <Link href="/checkout" onClick={handleCloseCart}>
-                    {t('proceed_to_checkout')}
-                  </Link>
-                </Button>
-                 */}
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full"
-                  asChild
-                >
+              <div className="grid w-full gap-3">
+                <Button size="lg" className="w-full" asChild>
                   <Link href="/cart" onClick={handleCloseCart}>
+                    <ArrowRight className="h-4 w-4 mr-2" />
                     {t('view_full_cart')}
                   </Link>
+                </Button>
+                
+                <Button variant="outline" size="sm" onClick={handleCloseCart}>
+                  {t('continue_shopping')}
                 </Button>
               </div>
               
               <p className="text-center text-xs text-muted-foreground">
                 {t('shipping_and_taxes_calculated_at_checkout')}
               </p>
-            </SheetFooter>
+            </div>
           </>
         )}
       </SheetContent>

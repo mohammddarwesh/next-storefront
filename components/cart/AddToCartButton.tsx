@@ -49,9 +49,9 @@ export default function AddToCartButton({
       <Button
         variant="outline"
         size={size}
-        className={`${className} bg-green-50 hover:bg-green-100 text-green-700`}
+        className={`${className} bg-green-50 hover:bg-green-100 text-green-700 min-w-0 flex-shrink-0`}
       >
-        {t('addedToCart')}
+        <span className="truncate">{t('addedToCart')}</span>
       </Button>
     );
   }
@@ -61,15 +61,15 @@ export default function AddToCartButton({
       onClick={handleAddToCart}
       variant={variant}
       size={size}
-      className={`${className} transition-all`}
+      className={`${className} transition-all min-w-0 flex-shrink-0 cursor-pointer`}
       disabled={isLoading}
     >
       {isLoading ? (
         <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
       ) : (
         <>
-          <ShoppingCart className="mr-2 h-4 w-4" />
-          {t('addToCart')}
+          <ShoppingCart className="mr-1 sm:mr-2 h-4 w-4 flex-shrink-0" />
+          <span className="truncate">{t('addToCart')}</span>
         </>
       )}
     </Button>
