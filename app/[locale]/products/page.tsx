@@ -14,45 +14,50 @@ interface ProductsPageProps {
   searchParams?: SearchParams;
 }
 
+import { siteConfig } from '@/lib/config';
+import { absoluteUrl } from '@/lib/utils/url';
+
 export async function generateMetadata({
-  params,
+  params: { locale },
   searchParams,
 }: {
-  params: Promise<{ locale: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+  params: { locale: string };
+  searchParams?: Record<string, string | string[] | undefined>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  const sp = (await searchParams) ?? {};
-
   const t = await getTranslations({ locale, namespace: 'Products' });
 
   const getStr = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v || '');
-  const search = getStr(sp?.search);
-  const category = getStr(sp?.category);
-  const sort = getStr(sp?.sort);
+  const search = getStr(searchParams?.search);
+  const category = getStr(searchParams?.category);
 
   const baseTitle = t('title');
-  const baseDesc = t('description');
-
-  const parts: string[] = [];
-  if (category) {
-    try {
-      parts.push(`Category: ${decodeURIComponent(category)}`);
-    } catch {
-      parts.push(`Category: ${category}`);
-    }
-  }
-  if (search) parts.push(`Search: "${search}"`);
-  if (sort) parts.push(`Sort: ${sort.replace('_', ' ')}`);
-
-  const suffix = parts.join(' · ');
-  const title = suffix ? `${baseTitle} — ${suffix}` : baseTitle;
-  const description = suffix ? `${baseDesc} (${suffix})` : baseDesc;
+  const pageTitle = category ? `${decodeURIComponent(category)} - ${baseTitle}` : baseTitle;
+  const pageDescription = t('description');
 
   return {
-    title,
-    description,
-    openGraph: { title, description, type: 'website' },
+    title: pageTitle,
+    description: pageDescription,
+    openGraph: {
+      title: pageTitle,
+      description: pageDescription,
+      type: 'website',
+      url: absoluteUrl(`/products?category=${category}`),
+      images: [
+        {
+          url: absoluteUrl('/og.png'),
+          width: 1200,
+          height: 630,
+          alt: pageTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: pageTitle,
+      description: pageDescription,
+      images: [absoluteUrl('/og.png')],
+      creator: siteConfig.links.twitter,
+    },
   };
 }
 

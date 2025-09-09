@@ -5,10 +5,10 @@ import { getProducts } from '@/lib/api/getProducts';
 export default async function ProductsSection() {
   const t = await getTranslations('Home');
   
-    const featuredProducts = await getProducts(4);
+    const featuredProducts = await getProducts( 4 );
 
     return (
-      <section className="py-16 bg-background">
+      <section className="py-16 bg-background items-center justify-center flex">
         <div className="container mx-auto px-4">
           <ProductsGrid
             products={featuredProducts}

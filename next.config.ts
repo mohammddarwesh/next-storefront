@@ -1,15 +1,22 @@
 import createNextIntlPlugin from 'next-intl/plugin';
+import type { NextConfig } from 'next';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   // Enable React Strict Mode
   reactStrictMode: true,
   
-  // Configure images
+  // Configure images with remote patterns for better security
   images: {
-    domains: ['fakestoreapi.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'fakestoreapi.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   // i18n is handled by next-intl
 };

@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation';
 import { getProductById } from '@/lib/api/getProductById';
-import { getBaseUrl, buildCanonicalUrl } from '@/lib/utils/url';
+import {absoluteUrl, buildCanonicalUrl } from '@/lib/utils/url';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import Script from 'next/script';
 import { Metadata } from 'next';
 import { ProductActions } from '@/components/product/ProductActions';
+import { siteConfig } from '@/lib/config';
 
 export async function generateMetadata({
   params: { id, locale },
@@ -23,12 +24,12 @@ export async function generateMetadata({
     return {
       title,
       description,
-      metadataBase: new URL(await getBaseUrl()),
+      metadataBase: new URL(siteConfig.url),
       alternates: {
         canonical: canonicalUrl,
         languages: {
-          'en': `${await getBaseUrl()}/en/product/${id}`,
-          'tr': `${await getBaseUrl()}/tr/urun/${id}`,
+          'en': absoluteUrl(`/en/product/${id}`),
+          'tr': absoluteUrl(`/tr/urun/${id}`),
         },
       },
       openGraph: {
@@ -37,7 +38,7 @@ export async function generateMetadata({
         url: canonicalUrl,
         siteName: 'Next Storefront',
         images: [{
-          url: new URL(product.image, await getBaseUrl()).toString(),
+          url: absoluteUrl(product.image),
           width: 1200,
           height: 630,
           alt: product.title,
@@ -88,7 +89,7 @@ export default async function ProductPage({
     },
     offers: {
       '@type': 'Offer',
-      url: `${getBaseUrl()}/${locale}/product/${id}`,
+      url: absoluteUrl(`/${locale}/product/${id}`),
       priceCurrency: locale === 'tr' ? 'TRY' : 'USD',
       price: product.price,
       priceValidUntil: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString().split('T')[0],

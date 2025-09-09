@@ -1,12 +1,70 @@
-import React from "react";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
-import { getMessages, setRequestLocale } from "next-intl/server";
-import MainNav from "@/components/MainNav";
+import React from 'react';
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
+import MainNav from '@/components/MainNav';
+import { siteConfig } from '@/lib/config';
+import { absoluteUrl } from '@/lib/utils/url';
+import { Metadata } from 'next';
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return routing.locales.map((locale: string) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Home' });
+
+  return {
+    metadataBase: new URL(siteConfig.url),
+    title: {
+      default: t('title'),
+      template: `%s | ${siteConfig.name}`,
+    },
+    description: t('description'),
+    authors: [
+      {
+        name: 'Next Storefront',
+        url: siteConfig.url,
+      },
+    ],
+    creator: 'Next Storefront',
+    openGraph: {
+      type: 'website',
+      locale: locale,
+      url: siteConfig.url,
+      title: siteConfig.name,
+      description: siteConfig.description,
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: absoluteUrl('/og.png'),
+          width: 1200,
+          height: 630,
+          alt: siteConfig.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: siteConfig.name,
+      description: siteConfig.description,
+      images: [absoluteUrl('/og.png')],
+      creator: siteConfig.links.twitter,
+    },
+    alternates: {
+      canonical: absoluteUrl(`/${locale}`),
+      languages: routing.locales.reduce((acc: Record<string, string>, loc: string) => {
+        acc[loc] = absoluteUrl(`/${loc}`);
+        return acc;
+      }, {}),
+    },
+  };
 }
 
 export default async function LocaleLayout({
@@ -14,7 +72,7 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>; 
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 

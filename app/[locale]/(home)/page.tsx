@@ -1,19 +1,27 @@
-import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import ProductsSection from '@/components/home/ProductsSection';
 import FeaturesSection from '@/components/home/FeaturesSection';
+import { siteConfig } from '@/lib/config';
+import { absoluteUrl, buildCanonicalUrl } from '@/lib/utils/url';
+import { Metadata } from 'next';
 
-export async function generateMetadata({
-  params
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'Home' });
-  
+  const pageTitle = t('title');
+  const pageDescription = t('description');
+
   return {
-    title: t('title'),
-    description: t('description'),
+    title: pageTitle,
+    description: pageDescription,
+    alternates: {
+      canonical: buildCanonicalUrl('', locale),
+    },
+    openGraph: {
+      title: pageTitle,
+      description: pageDescription,
+      type: 'website',
+      url: absoluteUrl(`/${locale}`),
+    },
   };
 }
 
@@ -23,10 +31,21 @@ export default async function HomePage() {
     getTranslations('Home')
   ]);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: absoluteUrl('/'),
+  };
+
   // Fetch featured products with error boundary
 
   return (
     <div className="min-h-screen flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 py-16">
         <div className="container mx-auto px-4 text-center">

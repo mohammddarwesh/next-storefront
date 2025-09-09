@@ -112,7 +112,7 @@ export default function ProductsGrid({
         {description && <p className="text-muted-foreground">{description}</p>}
       </div>
       
-      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 mb-8">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 mb-8 items-center justify-center">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
