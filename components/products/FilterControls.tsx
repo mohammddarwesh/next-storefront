@@ -104,7 +104,7 @@ export default function FilterControls({ categories, variant = 'sidebar' }: { ca
     </Button>
   </DialogTrigger>
   <DialogContent
-    className="fixed bottom-0 left-0 right-0 w-full max-h-[80vh] overflow-y-auto rounded-t-2xl border-t bg-background p-4 sm:max-w-md sm:rounded-lg sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2"
+    className="fixed bottom-0  right-0 w-full max-h-[80vh] overflow-y-auto rounded-t-2xl border-t bg-background p-4 sm:max-w-md sm:rounded-lg sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2"
   >
     <DialogHeader>
       <DialogTitle>{t("filters")}</DialogTitle>

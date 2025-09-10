@@ -68,19 +68,21 @@ export default function MainNav() {
             <div className="flex items-center space-x-4">
               <ThemeToggle />
               <LanguageSwitcher />
-              <CartSheet />
             </div>
           </nav>
 
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-muted md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile menu button and shopping cart */}
+          <div className="md:hidden flex items-center">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:bg-muted "
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+            <CartSheet />
+          </div>
         </div>
       </div>
 
