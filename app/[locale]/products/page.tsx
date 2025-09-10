@@ -93,13 +93,18 @@ export default async function ProductsPage({
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-        <aside className="md:col-span-4 lg:col-span-3 order-2 md:order-1">
+        <aside className="md:col-span-4 lg:col-span-3">
           <div className="md:sticky md:top-24">
-            <FilterControls categories={categories} />
+            <div className="hidden md:block">
+              <FilterControls categories={categories} variant="sidebar"/>
+            </div>
+            <div className="md:hidden">
+              <FilterControls variant="toolbar" categories={categories} />
+            </div>
           </div>
         </aside>
 
-        <section className="md:col-span-8 lg:col-span-9 order-1 md:order-2 space-y-6">
+        <section className="md:col-span-8 lg:col-span-9 space-y-6">
           <ProductsGrid 
             products={items}
             total={total}
