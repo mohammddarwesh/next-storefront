@@ -1,4 +1,4 @@
-import { routing } from './i18n/routing';
+import { routing } from './lib/i18n/routing';
 
 declare global {
   // Extend the next-intl module with our locale types

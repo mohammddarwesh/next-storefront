@@ -49,9 +49,7 @@ export default function CartPage() {
     toast.success(t('promoApplied'));
   };
 
-  const handleCheckout = () => {
-    router.push('/checkout');
-  };
+
 
   if (!isClient) {
     return (
@@ -269,7 +267,6 @@ export default function CartPage() {
               <Button 
                 className="w-full" 
                 size="lg" 
-                onClick={handleCheckout}
                 disabled={items.length === 0}
               >
                 {t('proceedToCheckout')}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
+import { routing } from '@/lib/i18n/routing';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import MainNav from '@/components/MainNav';
+import MainNav from '@/components/layout/MainNav';
 import { siteConfig } from '@/lib/config';
 import { absoluteUrl } from '@/lib/utils/url';
 import { Metadata } from 'next';

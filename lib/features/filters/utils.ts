@@ -1,71 +1,63 @@
 import { Product } from '@/lib/types';
-import { SortOrder } from './filtersSlice';
+import { FilterParams, SortOrder } from '@/lib/types/filters';
 
-export interface ApplyOptions {
-  products: Product[];
-  search?: string;
-  category?: string;
-  minPrice?: number | null;
-  maxPrice?: number | null;
-  sort?: SortOrder | string;
-  page?: number;
-  limit?: number;
-}
+export const filterByCategory = (products: Product[], category: string): Product[] => {
+  if (!category) return products;
+  const cat = decodeURIComponent(category).toLowerCase();
+  return products.filter(p => p.category.toLowerCase() === cat);
+};
 
-function byPriceAsc(a: Product, b: Product) { return a.price - b.price; }
-function byPriceDesc(a: Product, b: Product) { return b.price - a.price; }
-function stable<T>(arr: T[], cmp: (a: T, b: T) => number) {
-  return arr
-    .map((item, idx) => ({ item, idx }))
-    .sort((x, y) => {
-      const d = cmp(x.item, y.item);
-      return d !== 0 ? d : x.idx - y.idx;
-    })
-    .map(({ item }) => item);
-}
+export const filterByPrice = (products: Product[], minPrice: number | null, maxPrice: number | null): Product[] => {
+  return products.filter(p => {
+    if (typeof minPrice === 'number' && p.price < minPrice) return false;
+    if (typeof maxPrice === 'number' && p.price > maxPrice) return false;
+    return true;
+  });
+};
 
-export function applyFiltersSortPaginate({
-  products,
-  search,
-  category,
-  minPrice,
-  maxPrice,
-  sort,
-  page = 1,
-  limit = 12,
-}: ApplyOptions) {
-  let filtered = products.slice(0);
+export const filterBySearch = (products: Product[], search: string): Product[] => {
+  if (!search.trim()) return products;
+  const q = search.trim().toLowerCase();
+  return products.filter(p =>
+    p.title.toLowerCase().includes(q) || 
+    p.description.toLowerCase().includes(q)
+  );
+};
 
-  if (category && category.length > 0) {
-    const cat = decodeURIComponent(category).toLowerCase();
-    filtered = filtered.filter(p => p.category.toLowerCase() === cat);
-  }
+export const sortProducts = (products: Product[], sort: SortOrder): Product[] => {
+  if (sort === 'price_asc') return [...products].sort((a, b) => a.price - b.price);
+  if (sort === 'price_desc') return [...products].sort((a, b) => b.price - a.price);
+  return products;
+};
 
-  if (typeof minPrice === 'number') {
-    filtered = filtered.filter(p => p.price >= (minPrice as number));
-  }
-  if (typeof maxPrice === 'number') {
-    filtered = filtered.filter(p => p.price <= (maxPrice as number));
-  }
-
-  if (search && search.trim().length > 0) {
-    const q = search.trim().toLowerCase();
-    filtered = filtered.filter(p =>
-      p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
-    );
-  }
-
-  if (sort === 'price_asc') {
-    filtered = stable(filtered, byPriceAsc);
-  } else if (sort === 'price_desc') {
-    filtered = stable(filtered, byPriceDesc);
-  }
-
-  const total = filtered.length;
+export const paginateProducts = (products: Product[], page: number, limit: number) => {
+  const total = products.length;
   const totalPages = Math.max(1, Math.ceil(total / limit));
   const currentPage = Math.min(Math.max(1, page), totalPages);
   const start = (currentPage - 1) * limit;
-  const pageItems = filtered.slice(start, start + limit);
+  const items = products.slice(start, start + limit);
+  
+  return { items, total, currentPage, totalPages };
+};
 
-  return { items: pageItems, total, currentPage, totalPages };
+export function applyFiltersSortPaginate(
+  products: Product[],
+  filters: Partial<FilterParams>
+) {
+  const {
+    search = '',
+    category = '',
+    minPrice = null,
+    maxPrice = null,
+    sort = 'default',
+    page = 1,
+    limit = 12,
+  } = filters;
+
+  let filtered = filterByCategory(products, category);
+  filtered = filterByPrice(filtered, minPrice, maxPrice);
+  filtered = filterBySearch(filtered, search);
+  filtered = sortProducts(filtered, sort);
+  
+  return paginateProducts(filtered, page, limit);
 }

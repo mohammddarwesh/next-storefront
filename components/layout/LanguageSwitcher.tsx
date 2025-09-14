@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
-import { locales } from '@/i18n/routing';
+import { locales } from '@/lib/i18n/routing';
 
 type Locale = (typeof locales)[number];
 

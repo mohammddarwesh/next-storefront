@@ -2,32 +2,27 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getProducts } from '@/lib/api/getProducts';
 import ProductsGrid from '@/components/products/ProductsGrid';
-import { SearchParams } from '@/lib/types/index';
 import { getCategories } from '@/lib/api/getCategories';
-import FilterControls from '@/components/products/FilterControls';
+import FilterControls from '@/components/filters/FilterControls';
 import { applyFiltersSortPaginate } from '@/lib/features/filters/utils';
-
-export const revalidate = 3600; // Revalidate at most every hour
-
-interface ProductsPageProps {
-  params: { locale: string };
-  searchParams?: SearchParams;
-}
-
+import { parseFilterParams } from '@/lib/features/filters/urlParams';
 import { siteConfig } from '@/lib/config';
 import { absoluteUrl } from '@/lib/utils/url';
 
+export const revalidate = 3600;
+
+interface ProductsPageProps {
+  searchParams?: Record<string, string | string[] | undefined>;
+}
+
 export async function generateMetadata({
-  params: { locale },
   searchParams,
 }: {
-  params: { locale: string };
   searchParams?: Record<string, string | string[] | undefined>;
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'Products' });
+  const t = await getTranslations('Products');
 
   const getStr = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v || '');
-  const search = getStr(searchParams?.search);
   const category = getStr(searchParams?.category);
 
   const baseTitle = t('title');
@@ -61,34 +56,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductsPage({ 
-  searchParams : searchParamsProps
-}: ProductsPageProps) {
+export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const [t, products, categories] = await Promise.all([
     getTranslations('Products'),
     getProducts(),
     getCategories()
   ]);
-  const searchParams = await searchParamsProps;
-  // Parse and normalize query params
-  const page = searchParams?.page ? parseInt(searchParams.page, 10) : 1;
-  const limit = searchParams?.limit ? parseInt(searchParams.limit, 10) : 12;
-  const sort = (searchParams?.sort as string | undefined) || 'default';
-  const search = searchParams?.search || '';
-  const category = searchParams?.category || '';
-  const minPrice = searchParams?.minPrice ? Number(searchParams.minPrice) : null;
-  const maxPrice = searchParams?.maxPrice ? Number(searchParams.maxPrice) : null;
 
-  const { items, total, currentPage } = applyFiltersSortPaginate({
-    products,
-    search,
-    category,
-    minPrice: Number.isFinite(minPrice as number) ? (minPrice as number) : null,
-    maxPrice: Number.isFinite(maxPrice as number) ? (maxPrice as number) : null,
-    sort,
-    page,
-    limit,
-  });
+  const filterParams = parseFilterParams(searchParams);
+  const { items, total, currentPage } = applyFiltersSortPaginate(products, filterParams);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -109,7 +85,7 @@ export default async function ProductsPage({
             products={items}
             total={total}
             currentPage={currentPage}
-            itemsPerPage={limit}
+            itemsPerPage={filterParams.limit}
             title={t('allProducts')}
             description={t('browseAllProducts')}
             showPagination={true}

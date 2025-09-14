@@ -7,4 +7,12 @@ export const siteConfig = {
   links: {
     twitter: '@your-handle',
   },
+  keywords: [
+    'nextjs',
+    'ecommerce',
+    'storefront',
+    'react',
+    'typescript',
+    'shadcn-ui',
+  ],
 };

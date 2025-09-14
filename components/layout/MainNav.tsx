@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
-import { CartSheet } from './cart/CartSheet';
+import { CartSheet } from '../cart/CartSheet';
 
 export default function MainNav() {
   const t = useTranslations('Navigation');
@@ -68,6 +68,7 @@ export default function MainNav() {
             <div className="flex items-center space-x-4">
               <ThemeToggle />
               <LanguageSwitcher />
+              <CartSheet />
             </div>
           </nav>
 
