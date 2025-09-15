@@ -1,12 +1,15 @@
+// app/[locale]/layout.tsx - Improved locale layout
 import React from 'react';
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/lib/i18n/routing';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import MainNav from '@/components/layout/MainNav';
+import Footer from '@/components/layout/Footer';
 import { siteConfig } from '@/lib/config';
 import { absoluteUrl } from '@/lib/utils/url';
 import { Metadata } from 'next';
+
 
 export function generateStaticParams() {
   return routing.locales.map((locale: string) => ({ locale }));
@@ -89,8 +92,11 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <MainNav />
-      <main className="min-h-[calc(100vh-4rem)]">{children}</main>
+      <div className="flex flex-col min-h-screen">
+        <MainNav />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </div>
     </NextIntlClientProvider>
   );
 }

@@ -178,5 +178,15 @@
     "priceRange": "Fiyat Aralığı",
     "rating": "Değerlendirme",
     "stars": "yıldız"
+  },
+  "Footer": {
+    "aboutUs": "Hakkımızda",
+    "aboutText": "Yüksek kaliteli ürünlerin lider çevrimiçi perakendecisiyiz.",
+    "quickLinks": "Hızlı Bağlantılar",
+    "home": "Ana Sayfa",
+    "products": "Ürünler",
+    "contact": "İletişim",
+    "email": "E-posta",
+    "copyright": "Tüm hakları saklıdır."
   }
 }

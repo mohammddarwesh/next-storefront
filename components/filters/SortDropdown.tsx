@@ -2,13 +2,14 @@
 
 import { useFilterState } from '@/hooks/useFilterState';
 import { useTranslations } from 'next-intl';
+import { SortOrder } from '@/lib/types/filters';
 
 export default function SortDropdown() {
   const t = useTranslations('Products');
   const { currentParams, updateParams } = useFilterState();
 
   const handleChange = (value: string) => {
-    updateParams({ sort: value as any });
+    updateParams({ sort: value as SortOrder });
   };
 
   return (

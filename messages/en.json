@@ -178,5 +178,15 @@
     "priceRange": "Price Range",
     "rating": "Rating",
     "stars": "stars"
+  },
+  "Footer": {
+    "aboutUs": "About Us",
+    "aboutText": "We are a leading online retailer of high-quality products.",
+    "quickLinks": "Quick Links",
+    "home": "Home",
+    "products": "Products",
+    "contact": "Contact",
+    "email": "Email",
+    "copyright": "All rights reserved."
   }
 }
